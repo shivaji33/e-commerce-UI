@@ -1,11 +1,28 @@
 
 @import '../../scss/variables';
 .navbar {
-
+  background-color: #292935;
   .navbar-brand {
     img[alt="logo"] {
       width: 100px;
       height: auto;
     }
   }
+  .navbar-toggler {
+    background-color: #fff;
+  }
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  width: 8rem;
 }

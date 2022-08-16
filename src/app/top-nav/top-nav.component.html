@@ -1,9 +1,52 @@
-<nav class="navbar">
+<nav class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand">
-      <img src="../../assets/santha_logo.jpg" alt="logo">
+      <img src="../../assets/santha_logo.jpg" alt="logo" />
     </a>
+    <button class="navbar-toggler" type="button" (click)="onToggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{ show: isToggled }">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page">
+            <span class="material-symbols-outlined"> shopping_bag </span>
+            <span class="ms-2">Bag</span>
+          </a>
+        </li>
+        <li
+          class="nav-item"
+          (click)="openloginComponent()"
+          *ngIf="!authService.getUserDetails()"
+        >
+          <a class="nav-link" aria-current="page">
+            <span class="material-symbols-outlined"> login </span>
+            <span class="ms-2">Login</span>
+          </a>
+        </li>
+        <li class="nav-item" container="body" *ngIf="authService.getUserDetails()" dropdown [insideClick]="true">
+          <a class="nav-link dropdown-toggle" aria-current="page" dropdownToggle  aria-controls="user-dropdown">
+            <span class="material-symbols-outlined"> account_circle </span>
+            <span class="ms-2">{{
+              authService.getUserDetails().firstName
+            }}</span>
+            <span class="caret"></span>
+          </a>
+          <ul
+            id="user-dropdown"
+            *dropdownMenu
+            class="dropdown-menu"
+            role="menu"
+            aria-labelledby="button-basic"
+          >
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="authService.logout()">Logout</a>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
-
 <app-home></app-home>

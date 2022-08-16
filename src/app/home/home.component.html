@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="available-items-at-santha">
+  <app-rounded-item [item]="item" *ngFor="let item of santhItems"></app-rounded-item>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row mt-5 g-0">
+    <div class="col-sm-6 col-md-3" *ngFor="let item of purchaseItems">
+      <app-purchase-item [purchaseItem]="item"></app-purchase-item>
+    </div>
+  </div>
+</div>

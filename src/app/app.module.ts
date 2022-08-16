@@ -5,20 +5,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
-import { AuthenticationModule } from './authentication/authentication.module';
+import { RoundedItemComponent } from './rounded-item/rounded-item.component';
+
+import { PurchaseItemComponent } from './purchase-item/purchase-item.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './core/services/interceptor.service';
+import { SharedModule } from './shared/shared.module';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TopNavComponent
+    TopNavComponent,
+    RoundedItemComponent,
+    PurchaseItemComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthenticationModule
+    SharedModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+   }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
