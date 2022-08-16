@@ -1,0 +1,11 @@
+
+@import '../../scss/variables';
+.navbar {
+
+  .navbar-brand {
+    img[alt="logo"] {
+      width: 100px;
+      height: auto;
+    }
+  }
+}
