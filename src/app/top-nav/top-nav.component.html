@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md">
+<nav class="navbar navbar-expand-md fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand">
+    <a class="navbar-brand" routerLink="/home">
       <img src="../../assets/santha_logo.jpg" alt="logo" />
     </a>
     <button class="navbar-toggler" type="button" (click)="onToggle()">
@@ -9,7 +9,8 @@
     <div class="collapse navbar-collapse" [ngClass]="{ show: isToggled }">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page">
+          <a class="nav-link position-relative" aria-current="page" (click)="routeToViewCart()">
+            <span class="cart-count" *ngIf="authService.getUserDetails()">{{userDetails?.cart?.length}}</span>
             <span class="material-symbols-outlined"> shopping_bag </span>
             <span class="ms-2">Bag</span>
           </a>
@@ -49,4 +50,6 @@
     </div>
   </div>
 </nav>
-<app-home></app-home>
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+</div>

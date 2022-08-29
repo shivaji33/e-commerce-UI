@@ -1,1 +1,53 @@
-<p>cart works!</p>
+<div class="container pt-4">
+  <div class="row g-0">
+    <div class="cart-items-list col border shadow-sm">
+      <div class="cart-item" *ngFor="let cart of userCartDetails">
+        <div class="product-data">
+          <div class="product-thubnail">
+            <img [src]="cart.thubnail" [alt]="cart.name">
+          </div>
+          <div class="product-details">
+            <div class="product-name text-truncate">
+              {{cart.name}} ({{cart.quantityPerUnit}} {{cart.quantityPerUnitOfMeasure}})
+            </div>
+            <div class="product-price">
+                  <span style="font-weight: 600">&#8377;{{cart.currentPrice}}</span>
+                  <span class="text-muted ps-2"><del>&#8377;{{cart.prevPrice}}</del></span>
+                   <span class="ps-2" style="font-size: 14px" [ngStyle]="offerPercent(cart) > 0 ? {color:' rgb(38, 165, 65)'} : {color: 'red'}">
+                    {{offerPercent(cart)}} % {{offerPercent(cart) < 0 ? '&#8593;': '&#8595;'}}</span>
+            </div>
+            <div class="product-quantity">
+              <button type="button" class="quantity-decrement" [disabled]="cart.quantity < 2" (click)="cartItemQtnChange(cart, 'decrementCartItem')">-</button>
+              <div class="quantity-display">{{cart.quantity}}</div>
+              <button type="button" class="quantity-increment" (click)="cartItemQtnChange(cart, 'incrementCartItem')">+</button>
+            </div>
+          </div>
+          <div class="delivery-date">
+            Delivery by {{date | date : 'EEEE, MMM d, y'}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-price-details shadow-sm border col-md-4 col-sm-12">
+      <h5 class="p-3 text-muted border-bottom">Price Details</h5>
+      <ul class="list-unstyled">
+        <li class="p-3 d-flex justify-content-between">
+          <span>Price (1 items)</span>
+          <span>₹ 1,14,683</span>
+        </li>
+        <li class="p-3 d-flex justify-content-between delivery-charges">
+          <span>Delivery Charges</span>
+          <span>Free</span>
+        </li>
+        <li class="p-3 d-flex justify-content-between total-amount">
+          <span>Total Amount</span>
+          <span>₹ 1,14,683</span>
+        </li>
+      </ul>
+      <div class="p-3 text-center">
+        <input type="range" class="place-order" #placeOrder value="50" max="100" [(ngModel)]="placeOrderBtn"
+         (mouseup)="placeOrderMouseup()" (mousedown)="placeOrderMousedown()">
+      </div>
+    </div>
+  </div>
+</div>

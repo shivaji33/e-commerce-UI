@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ObserverSubjectService } from './observer-subject.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,  private observerSubjectService: ObserverSubjectService) { }
 
 
   setUserDetails(user: any) {
     if (!user) {
       return;
     }
-    console.log(user);
-    localStorage.setItem('userDetails',JSON.stringify(user))
+    localStorage.setItem('userDetails',JSON.stringify(user));
   }
+
 
   getUserDetails() {
     if (!localStorage.getItem('userDetails')) {
@@ -30,5 +31,6 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
+    this.observerSubjectService.setUserLogChangeSubject('LOGOUT');
   }
 }

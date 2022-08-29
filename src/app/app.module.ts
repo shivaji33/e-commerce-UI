@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './core/services/interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { CartComponent } from './cart/cart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CartComponent } from './cart/cart.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
