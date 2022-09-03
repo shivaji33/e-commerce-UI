@@ -19,18 +19,22 @@ export class AuthService {
 
 
   getUserDetails() {
-    if (!localStorage.getItem('userDetails')) {
-        return null;
-    }
-    const user = JSON.parse(localStorage.getItem('userDetails') || '')
-    if (!user) {
-      return null
-    }
+    const user = JSON.parse(`${localStorage.getItem('userDetails')}`) || {};
     return user;
   }
+
+  get isLoggedIn() {
+    const keys  = Object.keys(this.getUserDetails()) || [];
+    if (keys.length) {
+      return true;
+    }
+    return false;
+  }
+
 
   logout() {
     localStorage.clear();
     this.observerSubjectService.setUserLogChangeSubject('LOGOUT');
+    this.router.navigate(['/home']);
   }
 }

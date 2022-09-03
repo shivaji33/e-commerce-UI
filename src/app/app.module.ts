@@ -9,10 +9,15 @@ import { RoundedItemComponent } from './rounded-item/rounded-item.component';
 
 import { PurchaseItemComponent } from './purchase-item/purchase-item.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './core/services/interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { CartComponent } from './cart/cart.component';
 import { FormsModule } from '@angular/forms';
+
+import { NgxSpinnerModule } from "ngx-spinner";
+import { InterceptorService } from './core/services/interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -26,8 +31,11 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule.forRoot({type: 'ball-elastic-dots'}),
+    ToastrModule.forRoot({closeButton: true, timeOut: 3000})
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

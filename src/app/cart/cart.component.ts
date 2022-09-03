@@ -42,7 +42,6 @@ export class CartComponent implements OnInit {
           this.placeOrderBtn--;
         }
       }, 1)
-      console.log(this.placeOrderBtnIntervel);
     }
   }
   placeOrderMousedown(){

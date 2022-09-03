@@ -5,6 +5,7 @@ import { loginURL } from 'src/app/utils/urls';
 import { HttpService } from '../core/services/http.service';
 import { AuthService } from '../core/services/auth.service';
 import { ObserverSubjectService } from '../core/services/observer-subject.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private httpService: HttpService,
     private authService: AuthService,
-    private observerSubjectService: ObserverSubjectService
+    private observerSubjectService: ObserverSubjectService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const url = environment.baseUrl + loginURL;
     this.httpService.postData(url, this.loginCreds).subscribe((res: any) => {
-      this.authService.setUserDetails(res);
+      this.toastr.success(res.message)
+      this.authService.setUserDetails(res.userData);
       this.observerSubjectService.setUserLogChangeSubject('LOGIN');
       this.bsModalRef.hide();
     });

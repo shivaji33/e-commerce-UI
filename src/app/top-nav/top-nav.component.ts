@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/services/auth.service';
-import { HttpService } from '../core/services/http.service';
 import { ObserverSubjectService } from '../core/services/observer-subject.service';
 import { UsersApiService } from '../core/services/users-api.service';
 import { LoginComponent } from '../login/login.component';
@@ -22,10 +21,10 @@ export class TopNavComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: BsModalService,
     public authService: AuthService,
-    private httpService: HttpService,
     private observerSubjectService: ObserverSubjectService,
     private router: Router,
-    private usersApiService: UsersApiService
+    private usersApiService: UsersApiService,
+    private toastr: ToastrService
   ) {}
 
 
@@ -67,7 +66,12 @@ export class TopNavComponent implements OnInit, OnDestroy {
   }
 
   routeToViewCart() {
-    this.router.navigate(['/viewcart'])
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/viewcart']);
+    } else {
+      this.toastr.warning('Please login to see the bag')
+      this.openloginComponent();
+    }
   }
 
   ngOnDestroy(): void {
