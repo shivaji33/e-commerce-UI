@@ -6,6 +6,6 @@ This project was clone of multiple ecommerce website's out there
 
 [AadivaramSantha](https://shivaji33.github.io/e-commerce-UI/home)
 
-## Teck Stack
+## Tech Stack
 `Angular + Nodejs + Mongodb`
 
