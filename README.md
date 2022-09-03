@@ -2,7 +2,7 @@
 
 This project was clone of multiple ecommerce website's out there
 
-## Application Devserver 
+## Application Dev Server 
 
 [AadivaramSantha](https://shivaji33.github.io/e-commerce-UI/home)
 
