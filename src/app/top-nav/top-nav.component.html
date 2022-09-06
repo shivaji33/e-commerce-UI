@@ -10,7 +10,7 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link position-relative" aria-current="page" (click)="routeToViewCart()">
-            <span class="cart-count" *ngIf="authService.isLoggedIn">{{userDetails?.cart?.length}}</span>
+            <span class="cart-count" *ngIf="authService.isLoggedIn && userDetails?.cart?.length > 0">{{userDetails?.cart?.length}}</span>
             <span class="material-symbols-outlined"> shopping_bag </span>
             <span class="ms-2">Bag</span>
           </a>

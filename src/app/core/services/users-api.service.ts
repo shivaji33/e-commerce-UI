@@ -22,8 +22,23 @@ export class UsersApiService {
 
   cartItemQtnChange(userId: any, itemId: any, cartItemChange: any) {
 
-    const url = environment.baseUrl + `users/${userId}/${itemId}/${cartItemChange}`;
+    const url = environment.baseUrl + `users/${userId}/cartItemChange/${itemId}/${cartItemChange}`;
     return this.httpService.getData(url);
 
+  }
+
+  removeCartItem(userId: any, itemId: any) {
+    const url = environment.baseUrl + `users/${userId}/deleteCartItem/${itemId}`;
+    return this.httpService.getData(url);
+  }
+
+  addToCart(body: any) {
+    const url = environment.baseUrl + `users/addToCart`;
+    return this.httpService.updateData(url, body);
+  }
+
+  getPurchaseItems() {
+    const url = environment.baseUrl + 'vegetables/getVegetables';
+    return this.httpService.getData(url);
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpService } from '../core/services/http.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../core/services/auth.service';
+import { UsersApiService } from '../core/services/users-api.service';
 
 
 
@@ -9,7 +10,7 @@ import { HttpService } from '../core/services/http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   santhItems = [
     {
       name: 'Vegetables',
@@ -33,7 +34,9 @@ export class HomeComponent implements OnInit {
     }
   ];
   purchaseItems = [];
-  constructor(private httpService: HttpService) {}
+  subscription = new Subscription();
+  constructor(private userApiService: UsersApiService, private authService: AuthService) {}
+
 
   ngOnInit(): void {
     this.getPurchaseItems();
@@ -41,9 +44,31 @@ export class HomeComponent implements OnInit {
   }
 
   getPurchaseItems() {
-    const url = environment.baseUrl + 'vegetables/getVegetables';
-    this.httpService.getData(url).subscribe((res: any) => {
+    this.userApiService.getPurchaseItems().subscribe((res: any) => {
         this.purchaseItems = res.vegetables;
+        this.getUserDetails();
     });
+  }
+
+  getUserDetails() {
+    if (this.authService.getUserDetails()?.id) {
+      const sub = this.userApiService.getUserDetails(this.authService.getUserDetails().id).subscribe((userData: any) => {
+        const {user} = userData;
+        this.purchaseItems.forEach((item: any) => {
+          if (user?.cart?.length) {
+            user.cart.forEach((cartItem: any) => {
+              if (cartItem.id === item.id) {
+                item.isExistInCart = true;
+              }
+            });
+          }
+        });
+      });
+      this.subscription.add(sub);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

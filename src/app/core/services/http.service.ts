@@ -16,4 +16,8 @@ export class HttpService {
   postData(url: string,body: any, options?: any) {
     return this.httpClient.post(url, body, options);
    }
+
+   updateData(url: string,body: any, options?: any) {
+    return this.httpClient.put(url, body, options);
+   }
 }

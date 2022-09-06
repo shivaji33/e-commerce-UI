@@ -15,4 +15,5 @@ export class ObserverSubjectService {
   getUserLogChangeSubject() {
     return this.userLogChange;
   }
+
 }

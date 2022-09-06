@@ -45,6 +45,16 @@
           .quantity-display {
             margin: 2px 8px;
           }
+          .remove-cart-item-btn {
+            text-decoration: none;
+            color: #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all .5s;
+            &:hover {
+              color: $app-primary-color;
+            }
+          }
         }
       }
     }
@@ -100,4 +110,9 @@
     font-size: 24px;
 }
 }
+}
+
+
+.empty-cart {
+  height: calc(100vh - 85px);
 }
