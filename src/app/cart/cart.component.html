@@ -4,7 +4,7 @@
       <div class="cart-item" *ngFor="let cart of userCartDetails">
         <div class="product-data">
           <div class="product-thubnail">
-            <img [src]="cart.thubnail" [alt]="cart.name">
+            <img [src]="cart.thumbnail" [alt]="cart.name">
           </div>
           <div class="product-details">
             <div class="product-name text-truncate">
@@ -17,7 +17,8 @@
                     {{offerPercent(cart)}} % {{offerPercent(cart) < 0 ? '&#8593;': '&#8595;'}}</span>
             </div>
             <div class="product-quantity">
-              <button type="button" class="quantity-decrement" [disabled]="cart.quantity < 2" (click)="cartItemQtnChange(cart, 'decrementCartItem')">-</button>
+              <button type="button" class="quantity-decrement" [disabled]="cart.quantity <= cart.quantityPerUnit"
+              (click)="cartItemQtnChange(cart, 'decrementCartItem')">-</button>
               <div class="quantity-display">{{cart.quantity}}</div>
               <button type="button" class="quantity-increment" (click)="cartItemQtnChange(cart, 'incrementCartItem')">+</button>
               <a class="ms-3 remove-cart-item-btn" (click)="removeCartItem(cart)">Remove</a>

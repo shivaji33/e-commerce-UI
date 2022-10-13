@@ -52,12 +52,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getUserDetails() {
     if (this.authService.getUserDetails()?.id) {
-      const sub = this.userApiService.getUserDetails(this.authService.getUserDetails().id).subscribe((userData: any) => {
-        const {user} = userData;
+      const sub = this.userApiService.getUserCartDetais(this.authService.getUserDetails().id)
+      .subscribe((userData: any) => {
+        const {cart} = userData.userCart || {};
         this.purchaseItems.forEach((item: any) => {
-          if (user?.cart?.length) {
-            user.cart.forEach((cartItem: any) => {
-              if (cartItem.id === item.id) {
+          if (cart?.length) {
+            cart.forEach((cartItem: any) => {
+              if (cartItem.itemId === item.id) {
                 item.isExistInCart = true;
               }
             });

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../core/services/auth.service';
 import { ObserverSubjectService } from '../core/services/observer-subject.service';
@@ -16,11 +17,13 @@ export class CartComponent implements OnInit {
   placeOrderBtnIntervel: any;
   placeOrderBtn = 0;
   userId: any;
+  cartId: any;
   constructor(
     private authService: AuthService,
     private usersApiService: UsersApiService,
     private toaster: ToastrService,
-    private observerSubjectService: ObserverSubjectService
+    private observerSubjectService: ObserverSubjectService,
+    private router: Router
   ) {
     this.userId = this.authService.getUserDetails()?.id;
   }
@@ -35,6 +38,7 @@ export class CartComponent implements OnInit {
         .getUserCartDetais(this.userId)
         .subscribe((res: any) => {
           this.userCartDetails = res?.userCart?.cart || [];
+          this.cartId = res?.userCart.id;
         });
     }
   }
@@ -61,12 +65,15 @@ export class CartComponent implements OnInit {
   }
 
   placeOrder() {
-    console.log('Order Placed');
+    this.usersApiService.createOrder({cartId: this.cartId}).subscribe((res: any) => {
+      this.observerSubjectService.setUserLogChangeSubject('LOGIN');
+      this.router.navigate(['/checkout', res.orderDetails.id])
+    });
   }
 
   incrementCartItem(cart: any) {
     this.usersApiService
-      .cartItemQtnChange(this.userId, cart.id, 'incrementCartItem')
+      .cartItemQtnChange(this.userId, cart.itemId, 'incrementCartItem')
       .subscribe((res) => {
         this.getUserDetails();
       });
@@ -74,7 +81,7 @@ export class CartComponent implements OnInit {
 
   decrementCartItem(cart: any) {
     this.usersApiService
-      .cartItemQtnChange(this.userId, cart.id, 'decrementCartItem')
+      .cartItemQtnChange(this.userId, cart.itemId, 'decrementCartItem')
       .subscribe((res) => {
         this.getUserDetails();
       });
@@ -93,7 +100,7 @@ export class CartComponent implements OnInit {
 
   removeCartItem(cart: any) {
     this.usersApiService
-      .removeCartItem(this.userId, cart.id)
+      .removeCartItem(this.userId, cart.itemId)
       .subscribe((res: any) => {
         this.toaster.success(res.message);
         this.observerSubjectService.setUserLogChangeSubject('LOGIN');

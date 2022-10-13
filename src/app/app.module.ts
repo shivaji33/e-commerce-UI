@@ -17,6 +17,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { InterceptorService } from './core/services/interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaymentComponent } from './payment/payment.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TopNavComponent,
     RoundedItemComponent,
     PurchaseItemComponent,
-    CartComponent
+    CartComponent,
+    PaymentComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ import { LoginComponent } from '../login/login.component';
 export class TopNavComponent implements OnInit, OnDestroy {
   isToggled = false;
   bsModalRef?: BsModalRef;
-  userDetails: any = {};
+  bagDetails: any = {};
   subscription = new Subscription();
   constructor(
     private modalService: BsModalService,
@@ -29,7 +29,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.getUserDetails();
+    this.getBagDetails();
     this.getLogChange();
   }
 
@@ -45,21 +45,20 @@ export class TopNavComponent implements OnInit, OnDestroy {
     this.bsModalRef = this.modalService.show(LoginComponent, initialState);
   }
 
-  getUserDetails() {
+  getBagDetails() {
     const userId = this.authService.getUserDetails()?.id;
     if (userId) {
-      this.usersApiService.getUserDetails(userId).subscribe((res: any) => {
-        this.userDetails = res.user;
+      this.usersApiService.getUserCartDetais(userId).subscribe((res: any) => {
+        this.bagDetails = res.userCart;
       });
     }
   }
-
   getLogChange() {
     const sub = this.observerSubjectService.getUserLogChangeSubject().subscribe((res: string) => {
       if (res === 'LOGIN') {
-        this.getUserDetails();
+        this.getBagDetails();
       } else {
-        this.userDetails = {};
+        this.bagDetails = {};
       }
     });
     this.subscription.add(sub);

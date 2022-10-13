@@ -65,6 +65,7 @@ export class PurchaseItemComponent implements OnInit, OnChanges {
     const body = {
       ...pi,
       userId: this.authService.getUserDetails().id,
+      itemId: pi.id
     };
     this.userApiService.addToCart(body).subscribe((res) => {
       this.observerSubjectService.setUserLogChangeSubject('LOGIN');
