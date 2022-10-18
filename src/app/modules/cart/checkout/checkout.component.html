@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row pt-4">
+    <div class="col">
+      <app-check-out-steps></app-check-out-steps>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <app-cart-price-details [itemsLength]="cartData.userCartDetails.length"
+      [itemsTotalPrice]="cartData.itemsTotalPrice"></app-cart-price-details>
+    </div>
+  </div>
+</div>

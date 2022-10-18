@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -17,13 +15,8 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'viewcart',
-        component: CartComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'checkout/:orderId',
-        component: CheckoutComponent,
+        path: '',
+        loadChildren:  () => import('./modules/cart/cart.module').then(m => m.CartModule),
         canActivate: [AuthGuard]
       }
     ],

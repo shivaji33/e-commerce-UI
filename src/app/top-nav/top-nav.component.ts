@@ -66,7 +66,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
 
   routeToViewCart() {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['/viewcart']);
+      this.router.navigate(['/view-cart']);
     } else {
       this.toastr.warning('Please login to see the bag')
       this.openloginComponent();

@@ -1,0 +1,21 @@
+<div class="cart-price-details shadow-sm border">
+  <h5 class="p-3 text-muted border-bottom">Price Details</h5>
+  <ul class="list-unstyled">
+    <li class="p-3 d-flex justify-content-between">
+      <span
+        >Price ({{ itemsLength }}
+        {{ itemsLength > 1 ? "items" : "item" }} )</span
+      >
+      <span>₹ {{ itemsTotalPrice }}</span>
+    </li>
+    <li class="p-3 d-flex justify-content-between delivery-charges">
+      <span>Delivery Charges</span>
+      <span>Free</span>
+    </li>
+    <li class="p-3 d-flex justify-content-between total-amount">
+      <span>Total Amount</span>
+      <span>₹ {{ itemsTotalPrice }}</span>
+    </li>
+  </ul>
+  <ng-content></ng-content>
+</div>

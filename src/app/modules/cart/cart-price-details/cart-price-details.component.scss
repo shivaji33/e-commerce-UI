@@ -1,0 +1,21 @@
+
+.cart-price-details {
+  background-color: #fff;
+  margin-left: 1rem;
+  align-self: flex-start;
+  position: sticky;
+  top: calc(83px + 1.5rem);
+  .delivery-charges {
+    span {
+      font-weight: bold;
+      color: green;
+    }
+  }
+
+  .total-amount {
+    span {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../core/styles/scss/variables';
+
+
+.cart-items-list {
+  background-color: #fff;
+  padding: 1rem;
+}
+
+
+.empty-cart {
+  height: calc(100vh - 85px);
+}

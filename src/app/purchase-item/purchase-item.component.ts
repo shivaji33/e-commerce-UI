@@ -52,7 +52,7 @@ export class PurchaseItemComponent implements OnInit, OnChanges {
   addToBag() {
     if (this.authService.isLoggedIn) {
       if (this.purchaseItem.isExistInCart) {
-        this.router.navigate(['/viewcart']);
+        this.router.navigate(['/view-cart']);
       } else {
         this.updateUserCart();
       }

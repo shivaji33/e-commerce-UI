@@ -7,22 +7,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { DeletePromptComponent } from './delete-prompt/delete-prompt.component';
 
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    DeletePromptComponent
   ],
   imports: [
-    CommonModule,
     ModalModule.forRoot(),
     FormsModule,
     HttpClientModule,
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule
   ],
-  exports: [ModalModule,BsDropdownModule]
+  exports: [ModalModule,BsDropdownModule, FormsModule, DeletePromptComponent]
 })
 export class SharedModule { }
